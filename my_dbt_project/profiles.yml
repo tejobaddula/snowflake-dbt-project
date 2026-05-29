@@ -1,0 +1,10 @@
+my_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: ACCOUNTADMIN
+      warehouse: TRANSFORM_WH
+      database: ANALYTICS_DB
+      schema: STAGING
+      threads: 8

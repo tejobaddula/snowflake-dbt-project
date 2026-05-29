@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: int_employee_attrition
+    description: "Attrition analysis with derived fields like is_attrited, income_band and tenure_band"
+    columns:
+      - name: employee_id
+        description: "Unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: attrition
+        description: "Whether employee left (Yes/No)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Yes', 'No']
+      - name: is_attrited
+        description: "1 if employee left, 0 if not"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+      - name: income_band
+        description: "Low / Medium / High income classification"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Low', 'Medium', 'High']
+      - name: tenure_band
+        description: "New / Mid / Senior tenure classification"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['New', 'Mid', 'Senior']
+
+  - name: int_employee_performance
+    description: "Performance analysis with derived fields like performance_band and overall_satisfaction_score"
+    columns:
+      - name: employee_id
+        description: "Unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: performance_band
+        description: "High / Average / Low performer classification"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['High Performer', 'Average Performer', 'Low Performer']
+      - name: training_band
+        description: "Training frequency classification"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['No Training', 'Low Training', 'Moderate Training', 'High Training']
+      - name: overall_satisfaction_score
+        description: "Average of all 4 satisfaction metrics"
+        tests:
+          - not_null

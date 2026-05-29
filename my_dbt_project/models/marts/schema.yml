@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: dim_employees
+    description: "Employee dimension table combining attrition and performance data. One row per employee."
+    columns:
+      - name: employee_id
+        description: "Unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: department
+        description: "Employee department"
+        tests:
+          - not_null
+      - name: monthly_income
+        description: "Monthly income in dollars"
+        tests:
+          - not_null
+      - name: performance_band
+        description: "High / Average / Low performer"
+        tests:
+          - not_null
+      - name: is_attrited
+        description: "1 if employee left, 0 if not"
+        tests:
+          - not_null
+
+  - name: fct_attrition
+    description: "Attrition fact table aggregated by department, role, and other dimensions"
+    columns:
+      - name: total_employees
+        description: "Total employees in the group"
+        tests:
+          - not_null
+      - name: attrition_rate
+        description: "Percentage of employees who left"
+        tests:
+          - not_null
+
+  - name: fct_performance
+    description: "Performance fact table aggregated by department, role, and other dimensions"
+    columns:
+      - name: total_employees
+        description: "Total employees in the group"
+        tests:
+          - not_null
+      - name: avg_performance_rating
+        description: "Average performance rating for the group"
+        tests:
+          - not_null

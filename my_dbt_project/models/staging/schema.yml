@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: stg_hr_employees
+    description: >
+      Staged HR employee data cleaned and renamed from raw HR_Analytics CSV.
+      Deduplicates on employee_id keeping the first occurrence.
+      This is the single source of truth for all downstream models.
+
+    columns:
+      - name: employee_id
+        description: "Unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: age
+        description: "Employee age in years"
+        tests:
+          - not_null
+      - name: department
+        description: "Department the employee belongs to"
+        tests:
+          - not_null
+      - name: job_role
+        description: "Specific role of the employee"
+        tests:
+          - not_null
+      - name: monthly_income
+        description: "Monthly income in dollars"
+        tests:
+          - not_null
+      - name: attrition
+        description: "Whether employee left the company (Yes/No)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Yes', 'No']
+      - name: gender
+        description: "Employee gender"
+        tests:
+          - accepted_values:
+              values: ['Male', 'Female']
+      - name: performance_rating
+        description: "Performance rating score 1-4"
+        tests:
+          - not_null
+      - name: job_satisfaction
+        description: "Job satisfaction score 1-4"
+        tests:
+          - not_null
+      - name: work_life_balance
+        description: "Work life balance score 1-4"
+        tests:
+          - not_null
